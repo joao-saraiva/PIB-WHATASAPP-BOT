@@ -22,7 +22,7 @@ client.on('message', message => {
   switch(message.body){
     case '/inscrever':
       message.getContact().then(contact => {
-        axios.post(`${url}/player_per_matches`, { player_name: contact.pushname, player_number: contact.number, status: "confirmed" } )
+        axios.post(`${url}/player_per_matches`, { player_name: contact.pushname, player_number: contact.number, player_pib_priority: false } )
           .then(response => {
             message.reply(response.data);
           })
@@ -30,6 +30,41 @@ client.on('message', message => {
             message.reply("Não foi possivel fazer sua inscrição");
           });
       });
+      break;
+    case '/inscrever-pib':
+        message.getContact().then(contact => {
+          axios.post(`${url}/player_per_matches`, { player_name: contact.pushname, player_number: contact.number,  player_pib_priority: true })
+            .then(response => message.reply(response.data))
+            .catch(() => message.reply("Não foi possivel fazer sua inscrição"));
+        })
+      break;
+    case '/desistir':
+        message.getContact().then(contact => {
+          axios.patch(`${url}/player_per_matches/give_up`, { player_name: contact.pushname, player_number: contact.number } )
+            .then(response => message.reply(response.data))
+            .catch(() => message.reply("Falha ao desistir"));
+        })
+      break;
+      case '/confirmar':
+        message.getContact().then(contact => {
+          axios.post(`${url}/player_per_matches/confirm`, { player_name: contact.pushname, player_number: contact.number } )
+            .then(response => message.reply(response.data))
+            .catch(() => message.reply("Falha ao confirmar"));
+        })
+      break;
+      case '/lista':
+        message.getContact().then(contact => {
+          axios.get(`${url}/matches/print_list`)
+            .then(response => message.reply(response.data))
+            .catch(() => message.reply("Falha ao processar a lista"));
+        })
+      break;
+      case '/cancelar-partida':
+        message.getContact().then(contact => {
+          axios.patch(`${url}/matches/cancel`)
+            .then(response => message.reply(response.data))
+            .catch(() => message.reply("Falha ao cancelar a partida"));
+        })
       break;
     case '/ajuda':
       message.reply(myMock.helperText);

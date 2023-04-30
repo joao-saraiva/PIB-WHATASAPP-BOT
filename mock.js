@@ -27,7 +27,7 @@ const commandHelpers = [
   }, 
 
   {
-    commandName: "/visualizar",
+    commandName: "/lista",
     commandDescription: "Exibe todos os jogadores que inseriram seu nome."
   }, 
 
