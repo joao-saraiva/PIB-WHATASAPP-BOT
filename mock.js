@@ -12,18 +12,13 @@ const commandHelpers = [
   }, 
 
   {
-    commandName: "/inscrever-amigo --nome",
+    commandName: "/inscrever-amigo -nome",
     commandDescription: "Insere o nome na lista de uma pessoa que não está no grupo do whatsapp."
   }, 
 
   {
     commandName: "/desistir",
     commandDescription: "Remove seu noma da lista do jogo atual."
-  }, 
-
-  {
-    commandName: "/confirmar",
-    commandDescription: "Confirma a sua presença quando você é chamado pelos reservas."
   }, 
 
   {
@@ -34,11 +29,6 @@ const commandHelpers = [
   {
     commandName: "/cancelar",
     commandDescription: "Cancela o próximo jogo. (ADM)"
-  }, 
-
-  {
-    commandName: "/banir --dias",
-    commandDescription: "Bane a pessoa no total de dias escolhidos (ADM)"
   }, 
 
   {

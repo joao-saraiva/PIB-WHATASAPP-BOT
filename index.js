@@ -19,6 +19,17 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
+  if(message.body.startsWith('/inscrever-amigo')){
+    message.getContact().then(contact => {
+      const friendName = message.body.split('-')[2].trim();
+      axios.post(`${url}/player_per_matches`, { player_name: contact.pushname, player_number: contact.number, player_pib_priority: false, friend_name: friendName} )
+        .then(response => { message.reply(response.data)})
+        .catch(() => message.reply("Não foi possivel inscrever o seu amigo, tente nesse formato /inscrever-amigo -Pedro"))
+    })
+
+    return
+  }
+
   switch(message.body){
     case '/inscrever':
       message.getContact().then(contact => {
